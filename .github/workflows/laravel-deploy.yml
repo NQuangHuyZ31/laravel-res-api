@@ -63,8 +63,8 @@ jobs:
 
             echo "Create env if not exists"
             if [ ! -f .env ]; then
-              echo "${{ secrets.ENV_FILE }}" > .env
-              php artisan key:generate
+            cp .env.example .env
+            php artisan key:generate
             fi
 
             echo "Run database migration"
