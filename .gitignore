@@ -23,6 +23,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 .cursor
-*.text
+*.txt
 boost.json
 
