@@ -53,7 +53,7 @@ jobs:
           port: 65002
           script: |
 
-            cd /home/u684619093/domains/flyway.shoplands.store/public_html
+            cd /home/u684619093/domains/flyway.shoplands.store
 
             echo "Pull latest code"
             git pull origin main
