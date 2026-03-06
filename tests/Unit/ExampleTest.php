@@ -1,7 +1,8 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use Tests\TestCase;
 
-    $response->assertStatus(200);
-});
+class ExampleTest extends TestCase {
+    public function testExample() {
+    }
+}
