@@ -24,7 +24,7 @@ steps:
       tools: composer
 
   - name: Install dependencies
-    run: composer install --no-dev --optimize-autoloader --ignore-platform-req=php
+    run: composer install --no-interaction --prefer-dist
 
   - name: Prepare environment
     run: |
@@ -60,12 +60,12 @@ steps:
         git pull origin main
 
         echo "Install composer dependencies"
-        composer install --no-dev --optimize-autoloader
+        composer install --no-dev --optimize-autoloader --ignore-platform-req=php
 
         echo "Create env if not exists"
         if [ ! -f .env ]; then
-          echo "${{ secrets.ENV_FILE }}" > .env
-          php artisan key:generate
+        cp .env.example .env
+        php artisan key:generate
         fi
 
         echo "Run database migration"
