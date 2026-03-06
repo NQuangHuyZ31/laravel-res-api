@@ -11,7 +11,6 @@ test:
 name: Run Laravel Tests
 runs-on: ubuntu-latest
 
-```
 steps:
   - name: Checkout repository
     uses: actions/checkout@v4
@@ -33,14 +32,12 @@ steps:
 
   # - name: Run Pest Tests
   #   run: ./vendor/bin/pest
-```
 
 deploy:
 name: Deploy to Hostinger
 needs: test
 runs-on: ubuntu-latest
 
-```
 steps:
 
   - name: Deploy via SSH
@@ -85,4 +82,3 @@ steps:
         php artisan queue:restart || true
 
         echo "Deployment completed"
-```
