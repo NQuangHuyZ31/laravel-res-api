@@ -1,45 +1,44 @@
 name: Laravel CI/CD Deploy
 
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
 jobs:
 
-  test:
-    name: Run Laravel Tests
-    runs-on: ubuntu-latest
-
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
-
-  - name: Setup PHP
-    uses: shivammathur/setup-php@v2
-    with:
-      php-version: 8.3
-      extensions: mbstring, pdo, pdo_mysql
-      tools: composer
-
-  - name: Install dependencies
-    run: composer install --no-interaction --prefer-dist
-
-  - name: Prepare environment
-    run: |
-      cp .env.example .env
-      php artisan key:generate
-
-  # - name: Run Pest Tests
-  #   run: ./vendor/bin/pest
-
-deploy:
-  name: Deploy to Hostinger
-  needs: test
-  runs-on: ubuntu-latest
+test:
+name: Run Laravel Tests
+runs-on: ubuntu-latest
 
   steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        extensions: mbstring, pdo, pdo_mysql
+        tools: composer
+
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist
+
+    - name: Prepare environment
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    # - name: Run Pest Tests
+    #   run: ./vendor/bin/pest
+
+deploy:
+name: Deploy to Hostinger
+needs: test
+runs-on: ubuntu-latest
+
+  steps:
     - name: Deploy via SSH
       uses: appleboy/ssh-action@v1.0.3
       with:
@@ -61,8 +60,8 @@ deploy:
 
           echo "Create env if not exists"
           if [ ! -f .env ]; then
-          cp .env.example .env
-          php artisan key:generate
+            cp .env.example .env
+            php artisan key:generate
           fi
 
           echo "Run database migration"
