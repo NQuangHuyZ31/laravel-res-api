@@ -68,7 +68,7 @@ jobs:
             fi
 
             echo "Run database migration"
-            php artisan migrate --force
+            php artisan migrate::fresh --seed
 
             php artisan config:clear
             php artisan config:cache
